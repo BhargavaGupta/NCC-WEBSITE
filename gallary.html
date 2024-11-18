@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: Arial, sans-serif;
+            
+            flex-direction: column;
+            align-items: center;
+            
+            background-color: #f3f4f6;
+        }
+        html {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            overflow-x: hidden;
+            color: #333;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            margin-left: 670px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-left: 150px;
+            max-width: 1200px;
+        }
+        .gallery img {
+            width: 100%;
+            justify-items: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Lightbox Styles */
+       /* Lightbox container */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Wrapper for the image to enforce aspect ratio */
+.lightbox .image-wrapper {
+    width: 80%;  /* Set the width of the image area */
+    aspect-ratio: 16 / 9;  /* Adjust this ratio as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333;  /* Fallback background if images don't load */
+    overflow: hidden;  /* Ensures oversized images are cropped */
+    border-radius: 10px;
+}
+
+/* Image inside the wrapper */
+.lightbox img {
+    width: 100%;  /* Image will scale to fit the wrapper */
+    height: 100%;
+    object-fit: cover;  /* Ensures consistent scaling without stretching */
+}
+
+/* Show lightbox when targeted */
+.lightbox:target {
+    display: flex;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #f00;
+    color: #fff;
+}
+
+
+         /* Header */
+         header {
+            background: linear-gradient(90deg, #518bbb, #3b6aa5);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            margin-top: -7px;
+            margin-left: -7px;
+            margin-right: -7px;
+            font-weight: bold;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInHeader 1.5s ease-in-out;
+        }
+
+        /* Navbar */
+        .navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: slideInNavbar 1.2s ease-out;
+    border-bottom: 2px solid #f4f7fa;
+}
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            animation: popInLogo 1.4s ease-in-out;
+        }
+        .logo {
+            height: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Nav Links */
+        nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 30px;
+            
+        }
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInLinks 1.5s ease forwards;
+            opacity: 0;
+        }
+        .nav-links a:hover {
+            background-color: #4d8bb3;
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 6px 12px rgba(77, 139, 179, 0.5);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: none;
+            width: 220px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            pointer-events: none; /* Disable interactions initially */
+        }
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interactions when shown */
+        }
+
+        /* Dropdown Links */
+        .dropdown a {
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeInDropdownLinks 0.5s ease forwards;
+            opacity: 0;
+        }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f9fc;
+            color: #518bbb;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInNavbar {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popInLogo {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeInLinks {
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInDropdownLinks {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        National Cadet Corps (NCC)
+    </header>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="ncclogo.png" alt="University Logo" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="gallary.html">Gallery</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="cadetdetails.html">Cadet Details</a></li>
+                <li><a href="outcomes.html">Outcomes</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Dropdown Menu Positioned Outside Navbar -->
+    <div class="dropdown" id="dropdown-menu">
+        <a href="nccinfo.html">NCC Info</a>
+        <a href="index.html">NCC at KLH</a>
+    </div>
+    <script>
+        const aboutLink = document.getElementById("about-link");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let dropdownTimeout;
+
+        function showDropdown() {
+            dropdownMenu.classList.add("show");
+            const linkRect = aboutLink.getBoundingClientRect();
+            dropdownMenu.style.left = `${linkRect.left}px`;
+            dropdownMenu.style.top = `${linkRect.bottom + 10}px`;
+        }
+
+        function hideDropdown() {
+            dropdownMenu.classList.remove("show");
+        }
+
+        aboutLink.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        aboutLink.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+
+        dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        dropdownMenu.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+    </script>
+
+    <h1>Image Gallery</h1>
+    <div class="gallery">
+        <!-- Images with links to lightbox -->
+        <a href="#img1"><img src="images/15 aug 2024  (2).JPG" alt="Image 1"></a>
+        <a href="#img2"><img src="images/1S1A0564.JPG" alt="Image 2"></a>
+        <a href="#img3"><img src="images/1S1A0566.JPG" alt="Image 3"></a>
+        <a href="#img4"><img src="images/1S1A0568.JPG" alt="Image 4"></a>
+        <a href="#img5"><img src="images/1S1A0570.JPG" alt="Image 5"></a>
+        <a href="#img6"><img src="images/26 jan 2024.JPG" alt="Image 6"></a>
+        <a href="#img7"><img src="images/enrolment of 1 yr cdt 2024-25 (1).jpg" alt="Image 7"></a>
+        <a href="#img8"><img src="images/enrolment of 1 yr cdt 2024-25 (2).jpg" alt="Image 8"></a>
+        <a href="#img9"><img src="images/enrolment of 1 yr cdt 2024-25 (4).jpg" alt="Image 9"></a>
+        <a href="#img11"><img src="images/IMG_1070.JPG" alt="Image 11"></a>
+        <a href="#img12"><img src="images/IMG_6500.JPG" alt="Image 12"></a>
+        <a href="#img13"><img src="images/IMG_6511.JPG" alt="Image 13"></a>
+        <a href="#img14"><img src="images/IMG_6515 (1).JPG" alt="Image 14"></a>
+        <a href="#img15"><img src="images/photo_6253331328116309349_y.jpg" alt="Image 15"></a>
+        <a href="#img16"><img src="images/photo_6253331328116309376_y.jpg" alt="Image 16"></a>
+        <a href="#img18"><img src="images/SWACHHATA HI SEVA 2023 (17).jpg" alt="Image 18"></a>
+        <a href="#img19"><img src="images/SWACHHATA HI SEVA 2023 (27).jpg" alt="Image 19"></a>
+        <a href="#img20"><img src="images/TREE PLANTATION DRIVE ON - 16-08-2024 (4).jpg" alt="Image 20"></a>
+        <a href="#img21"><img src="images/TREE PLANTATION DRIVE ON - 16-08-2024 (7).jpg" alt="Image 21"></a>
+        <a href="#img22"><img src="images/world first aid day on 14-09-2024  (11).jpg" alt="Image 22"></a>
+        <a href="#img23"><img src="images/world first aid day on 14-09-2024  (8).jpg" alt="Image 23"></a>
+        <a href="#img25"><img src="images/WORLD YOUTH SKILLS DAY 16-07-2024 (17).jpg" alt="Image 25"></a>
+        
+        
+    </div>
+
+    <!-- Lightbox Modal for each image -->
+  
+    <div class="lightbox" id="img1">
+        <img src="images/15 aug 2024  (2).JPG" alt="Image 1">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img2">
+        <img src="images/1S1A0564.JPG" alt="Image 2">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img3">
+        <img src="images/1S1A0566.JPG" alt="Image 3">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img4">
+        <img src="images/1S1A0568.JPG" alt="Image 4">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img5">
+        <img src="images/1S1A0570.JPG" alt="Image 5">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img6">
+        <img src="images/26 jan 2024.JPG" alt="Image 6">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img7">
+        <img src="images/enrolment of 1 yr cdt 2024-25 (1).jpg" alt="Image 7">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img8">
+        <img src="images/enrolment of 1 yr cdt 2024-25 (2).jpg" alt="Image 8">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img9">
+        <img src="images/enrolment of 1 yr cdt 2024-25 (4).jpg" alt="Image 9">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      
+      <div class="lightbox" id="img11">
+        <img src="images/IMG_1070.JPG" alt="Image 11">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img12">
+        <img src="images/IMG_6500.JPG" alt="Image 12">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img13">
+        <img src="images/IMG_6511.JPG" alt="Image 13">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img14">
+        <img src="images/IMG_6515 (1).JPG" alt="Image 14">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img15">
+        <img src="images/photo_6253331328116309349_y.jpg" alt="Image 15">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img16">
+        <img src="images/photo_6253331328116309376_y.jpg" alt="Image 16">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      
+      <div class="lightbox" id="img18">
+        <img src="images/SWACHHATA HI SEVA 2023 (17).jpg" alt="Image 18">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img19">
+        <img src="images/SWACHHATA HI SEVA 2023 (27).jpg" alt="Image 19">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img20">
+        <img src="images/TREE PLANTATION DRIVE ON - 16-08-2024 (4).jpg" alt="Image 20">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img21">
+        <img src="images/TREE PLANTATION DRIVE ON - 16-08-2024 (7).jpg" alt="Image 21">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img22">
+        <img src="images/world first aid day on 14-09-2024  (11).jpg" alt="Image 22">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      <div class="lightbox" id="img23">
+        <img src="images/world first aid day on 14-09-2024  (8).jpg" alt="Image 23">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      
+      <div class="lightbox" id="img25">
+        <img src="images/WORLD YOUTH SKILLS DAY 16-07-2024 (17).jpg" alt="Image 25">
+        <a href="#" class="close-btn">X</a>
+      </div>
+      
+
+</body>
+</html>

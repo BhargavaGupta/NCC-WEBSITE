@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC Navigation Bar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset and Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #518bbb, #3b6aa5);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInHeader 1.5s ease-in-out;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: slideInNavbar 1.2s ease-out;
+            border-bottom: 2px solid #f4f7fa;
+        }
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            animation: popInLogo 1.4s ease-in-out;
+        }
+        .logo {
+            height: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Nav Links */
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInLinks 1.5s ease forwards;
+            opacity: 0;
+        }
+        .nav-links a:hover {
+            background-color: #4d8bb3;
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 6px 12px rgba(77, 139, 179, 0.5);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: none;
+            width: 220px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            pointer-events: none; /* Disable interactions initially */
+        }
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interactions when shown */
+        }
+
+        /* Dropdown Links */
+        .dropdown a {
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeInDropdownLinks 0.5s ease forwards;
+            opacity: 0;
+        }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f9fc;
+            color: #518bbb;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInNavbar {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popInLogo {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeInLinks {
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInDropdownLinks {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        National Cadet Corps (NCC)
+    </header>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="ncclogo.png" alt="University Logo" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Calendar</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Cadet Details</a></li>
+                <li><a href="#">Outcomes</a></li>
+                <li><a href="#">Awards</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Dropdown Menu Positioned Outside Navbar -->
+    <div class="dropdown" id="dropdown-menu">
+        <a href="#">NCC Info</a>
+        <a href="#">NCC at KLH</a>
+    </div>
+
+    <script>
+        const aboutLink = document.getElementById("about-link");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let dropdownTimeout;
+
+        function showDropdown() {
+            dropdownMenu.classList.add("show");
+            const linkRect = aboutLink.getBoundingClientRect();
+            dropdownMenu.style.left = `${linkRect.left}px`;
+            dropdownMenu.style.top = `${linkRect.bottom + 10}px`;
+        }
+
+        function hideDropdown() {
+            dropdownMenu.classList.remove("show");
+        }
+
+        aboutLink.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        aboutLink.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+
+        dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        dropdownMenu.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC at KLH University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #1f3f7e;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>NCC at KLH University</h1>
+        <div class="content">
+            <h2>1(T) Battalion NCC SD & SW</h2>
+            <p>
+                The NCC Unit at KLH University is designated as the 1(T) Battalion, led by <strong>LT. Mohit Kumar Mishra</strong> for both boys and girls cadets. This battalion is part of the Hyderabad region within the Hyderabad Group.
+            </p>
+            <p>
+                Under the leadership of LT. Mohit Kumar Mishra, the NCC unit at KLH University actively participates in various activities, contributing significantly to the overall objectives of the National Cadet Corps (NCC). This unit provides an opportunity for students to develop discipline, leadership, and camaraderie while serving the community and nation.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

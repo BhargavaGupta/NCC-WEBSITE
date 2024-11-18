@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Cadet Corps (NCC)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <style>
+    /* Government Website Theme - International Standards */
+:root {
+    --gov-primary: #1a4480;
+    --gov-secondary: #005ea2;
+    --gov-accent: #c9302c;
+    --gov-neutral: #1b1b1b;
+    --gov-background: #f0f0f0;
+    --gov-white: #ffffff;
+    --text-primary: #1b1b1b;
+    --text-secondary: #3d4551;
+    --link-color: #005ea2;
+    --link-hover: #0b4778;
+    --border-color: #dfe1e2;
+    --focus-color: #2491ff;
+    --spacing-unit: 0.5rem;
+    --container-width: 1200px;
+}
+
+/* Base Styles */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--gov-background);
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: var(--gov-primary);
+    border-bottom: 4px solid var(--gov-accent);
+}
+
+.nav {
+    background: var(--gov-primary);
+}
+
+.nav-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-title {
+    color: var(--gov-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: var(--gov-white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: var(--gov-secondary);
+}
+
+/* Menu Toggle */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.menu-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--gov-white);
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--gov-white);
+    transition: transform 0.3s;
+}
+
+.menu-icon::before {
+    top: -6px;
+}
+
+.menu-icon::after {
+    bottom: -6px;
+}
+
+/* Container and Sections */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.section {
+    margin-bottom: 3rem;
+}
+
+/* Motto Banner */
+.motto-banner {
+    background: linear-gradient(to right, var(--gov-primary), var(--gov-secondary));
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    color: var(--gov-white);
+}
+
+.motto-banner h2,
+.motto-banner h3 {
+    color: var(--gov-white);
+}
+
+/* Content Cards */
+.content-card {
+    background: var(--gov-white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Lists */
+.values-list,
+.aims-list,
+.org-list,
+.flag-list,
+.training-list,
+.camps-list,
+.cert-list,
+.activities-list,
+.adventure-list {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.values-list li,
+.aims-list li,
+.org-list li,
+.flag-list li,
+.training-list li,
+.camps-list li,
+.cert-list li,
+.activities-list li,
+.adventure-list li {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.values-list li::before,
+.aims-list li::before,
+.org-list li::before,
+.flag-list li::before,
+.training-list li::before,
+.camps-list li::before,
+.cert-list li::before,
+.activities-list li::before,
+.adventure-list li::before {
+    content: "•";
+    color: var(--gov-primary);
+    position: absolute;
+    left: -1.5rem;
+    font-weight: bold;
+}
+
+/* Quote Box */
+.quote-box {
+    border-left: 4px solid var(--gov-primary);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background-color: var(--gov-background);
+    border-radius: 0 8px 8px 0;
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.ranks-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--gov-white);
+}
+
+.ranks-table th,
+.ranks-table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.ranks-table th {
+    background-color: var(--gov-primary);
+    color: var(--gov-white);
+}
+
+.ranks-table tr:nth-child(even) {
+    background-color: var(--gov-background);
+}
+
+/* Song Section */
+.song-content {
+    text-align: center;
+    font-style: italic;
+    line-height: 2;
+}
+
+.song-content p {
+    margin-bottom: 2rem;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--gov-primary);
+    color: var(--gov-white);
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--gov-primary);
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+    }
+
+    .motto-banner {
+        padding: 1.5rem 1rem;
+    }
+
+    .content-card {
+        padding: 1.5rem;
+    }
+
+    .ranks-table {
+        font-size: 0.9rem;
+    }
+
+    .ranks-table th,
+    .ranks-table td {
+        padding: 0.75rem;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --gov-primary: #000000;
+        --gov-secondary: #000000;
+        --text-primary: #000000;
+        --link-color: #000000;
+        --border-color: #000000;
+    }
+}
+  </style>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <h1 class="nav-title">National Cadet Corps</h1>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <div class="nav-menu">
+                    <a href="#motto" class="nav-link">Motto</a>
+                    <a href="#aims" class="nav-link">Aims</a>
+                    <a href="#oath" class="nav-link">Oath & Pledge</a>
+                    <a href="#history" class="nav-link">History</a>
+                    <a href="#organization" class="nav-link">Organization</a>
+                    <a href="#training" class="nav-link">Training</a>
+                    <a href="#certificates" class="nav-link">Certificates</a>
+                    <a href="#ranks" class="nav-link">Ranks</a>
+                    <a href="#activities" class="nav-link">Activities</a>
+                    <a href="#song" class="nav-link">NCC Song</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="motto" class="section">
+            <div class="motto-banner">
+                <h2>Motto of NCC</h2>
+                <h3>Unity and Discipline (Ekta aur Anushasan)</h3>
+            </div>
+
+            <div class="content-card">
+                <p>The need for having motto for the Corps was discussed in the 11th Central Advisory Committee (CAC) meeting held on 11 Aug 1978. The final decision for selection of "Unity and Discipline" as motto for the NCC was taken in the 12th CAC meeting held on 12 Oct 1980.</p>
+
+                <h3>Core Values</h3>
+                <ul class="values-list">
+                    <li>A sense of patriotic commitment to encourage cadets to contribute to national development</li>
+                    <li>Respect for diversities in religion, language, culture, ethnicity, lifestyle and habitat</li>
+                    <li>Abiding commitment to learn and adhere to the norms and values enshrined in the Indian Constitution</li>
+                    <li>Understanding the value of a just and impartial exercise of authority</li>
+                    <li>Ability to participate in community development and other social programs</li>
+                    <li>A healthy lifestyle free of substance abuse and other unhealthy practices</li>
+                    <li>Sensitivity to the needs of poor and socially disadvantaged fellow citizens</li>
+                    <li>Inculcating habits of restraint and self-awareness</li>
+                    <li>Understanding the values of honesty, truthfulness, self-sacrifice, perseverance and hard work</li>
+                    <li>Respect for knowledge, wisdom and the power of ideas</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="aims" class="section">
+            <div class="content-card">
+                <h2>Aims of NCC</h2>
+                <ul class="aims-list">
+                    <li>To develop qualities of character, courage, comradeship, discipline, leadership, secular outlook, spirit of adventure and sportsmanship and the ideals of selfless service among the youth to make them useful citizens</li>
+                    <li>To create a human resource of organized, trained and motivated youth to provide leadership in all walks of life including the Armed Forces and be always available for the service of the nation</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="oath" class="section">
+            <div class="content-card">
+                <h2>NCC Oath</h2>
+                <div class="quote-box">
+                    <p>"I do hereby solemnly promise that I will serve my motherland most truly and loyally and that, I will abide by the rules and regulations of the National Cadet Corps. Further, under the command and control of my commanding officer I will participate in every camp most sincerely and wholeheartedly."</p>
+                </div>
+
+                <h2>NCC Pledge</h2>
+                <div class="quote-box">
+                    <p>"We, the cadets of the national cadet corps, do solemnly pledge that we shall always uphold the unity of India. We resolve to be disciplined and responsible citizens of our nation. We shall undertake positive community service in the spirit of selflessness and concern for our fellow beings."</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="history" class="section">
+            <div class="content-card">
+                <h2>History of NCC</h2>
+                <p>The NCC in India was formed with the National Cadet Corps Act of 1948. It was raised on 15 July 1948 as a successor of the University Officers Training Corps (UOTC) which was established by the British in 1942. During World War II, the UOTC never came up to the expectations set by the British. This led to the idea that some better schemes should be formed, which could train more young men in a better way, even during peace times.</p>
+                
+                <p>A committee headed by Pandit H.N. Kunzru recommended a cadet organization to be established in schools and colleges at a national level. The National Cadet Corps Act was accepted by the Governor General and on 15 July 1948 the National Cadet Corps came into existence.</p>
+                
+                <p>During the 1965 and 1971 wars with Pakistan, NCC cadets were the second line of defence. They organized camps to assist the ordinance factories, supplying arms and ammunition to the front, and also were used as patrol parties to capture enemy paratroopers. The NCC cadets also worked hand in hand with the Civil Defence authorities and actively took part in rescue work and traffic control.</p>
+            </div>
+        </section>
+
+        <section id="organization" class="section">
+            <div class="content-card">
+                <h2>Organization Structure</h2>
+                <p>The NCC is headed by a Director General, an Army Officer of the rank of Lieutenant General, who is responsible for the functioning of the National Cadet Corps in the country through the National Cadet Corps Headquarters situated at Delhi.</p>
+                
+                <h3>State Level Organization</h3>
+                <p>At the State Level, the country has been divided into 17 Directorates covering all States and Union Territories. Each of the State National Cadet Corps Directorate Headquarters controls two to fourteen Group Headquarters.</p>
+                
+                <h3>Command Structure</h3>
+                <ul class="org-list">
+                    <li>Directorates are commanded by Brigadiers or their equivalents</li>
+                    <li>Groups are commanded by Colonels or their equivalents from the Air Force and the Navy</li>
+                    <li>NCC Units are commanded by Majors / Lieutenant Colonels or their equivalents</li>
+                </ul>
+
+                <h3>NCC Flag</h3>
+                <p>The NCC flag was first introduced in 1951. The flag was designed to reflect the inter-service character of the Corps. The three colors in the flag represent:</p>
+                <ul class="flag-list">
+                    <li>Red for the Army</li>
+                    <li>Deep blue for the Navy</li>
+                    <li>Light blue for the Air Force</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="training" class="section">
+            <div class="content-card">
+                <h2>Training Activities</h2>
+                
+                <h3>Institutional Training</h3>
+                <ul class="training-list">
+                    <li>Drill and arms training</li>
+                    <li>Weapon training and firing</li>
+                    <li>Map reading and field craft</li>
+                    <li>First aid and health & hygiene</li>
+                    <li>Leadership and personality development</li>
+                    <li>Disaster management</li>
+                </ul>
+
+                <h3>Centrally Organized Camps</h3>
+                <ul class="camps-list">
+                    <li>Leadership Camp</li>
+                    <li>Rock Climbing Camp</li>
+                    <li>Trekking Camp</li>
+                    <li>National Integration Camp (NIC)</li>
+                    <li>Thal Sainik Camp (TSC)</li>
+                    <li>Army Attachment Camp (AAC)</li>
+                    <li>Republic Day Camp (RDC)</li>
+                    <li>Annual Training Camp (ATC)</li>
+                </ul>
+
+                <h3>Youth Exchange Programme (YEP)</h3>
+                <p>The Youth Exchange Programme involves exchange of cadets with 10 countries: Australia, Bangladesh, Bhutan, Canada, Maldives, Nepal, Singapore, UK, Russia and Vietnam.</p>
+            </div>
+        </section>
+
+        <section id="certificates" class="section">
+            <div class="content-card">
+                <h2>Certificate Programs</h2>
+                
+                <h3>Certificate 'B' Examination Requirements</h3>
+                <ul class="cert-list">
+                    <li>Must be in second year of SD/SW NCC Training</li>
+                    <li>Must have attended one Annual Training Camp/NIC</li>
+                    <li>Minimum 75% attendance in training periods</li>
+                    <li>Break in NCC service should not exceed 18 months</li>
+                    <li>Air Wing Cadets must complete minimum 10 Glide launches</li>
+                </ul>
+
+                <h3>Certificate 'C' Examination Requirements</h3>
+                <ul class="cert-list">
+                    <li>Must have passed Certificate 'B'</li>
+                    <li>Must be in second/third year of SD/SW NCC Training</li>
+                    <li>75% attendance in 3rd year syllabus</li>
+                    <li>Must have attended two camps</li>
+                    <li>Break in service should not exceed 18 months</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="ranks" class="section">
+            <div class="content-card">
+                <h2>NCC Ranks</h2>
+                <div class="table-container">
+                    <table class="ranks-table">
+                        <thead>
+                            <tr>
+                                <th>Army Wing</th>
+                                <th>Naval Wing</th>
+                                <th>Air Wing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Senior Under Officer</td>
+                                <td>Senior Cadet Captain</td>
+                                <td>Senior Under Officer</td>
+                            </tr>
+                            <tr>
+                                <td>Cadet Under Officer</td>
+                                <td>Junior Cadet Captain</td>
+                                <td>Cadet Under Officer</td>
+                            </tr>
+                            <tr>
+                                <td>Company Quarter Master Sergeant</td>
+                                <td>Petty Officer Sergeant Major</td>
+                                <td>Warrant Officer</td>
+                            </tr>
+                            <tr>
+                                <td>Sergeant</td>
+                                <td>Leader</td>
+                                <td>Cadet Sergeant</td>
+                            </tr>
+                            <tr>
+                                <td>Corporal</td>
+                                <td>Cadet Class I</td>
+                                <td>Corporal</td>
+                            </tr>
+                            <tr>
+                                <td>Lance Corporal</td>
+                                <td>Cadet Class II</td>
+                                <td>Leading Flight Cadet</td>
+                            </tr>
+                            <tr>
+                                <td>Cadet</td>
+                                <td>Cadet</td>
+                                <td>Cadet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="section">
+            <div class="content-card">
+                <h2>Community Development Activities</h2>
+                <ul class="activities-list">
+                    <li>Blood donation camps</li>
+                    <li>Adult literacy programs</li>
+                    <li>Anti-drug campaigns</li>
+                    <li>Tree plantation drives</li>
+                    <li>Environmental conservation</li>
+                    <li>Disaster relief operations</li>
+                    <li>Health and hygiene awareness</li>
+                    <li>Social awareness campaigns</li>
+                </ul>
+
+                <h3>Adventure Activities</h3>
+                <ul class="adventure-list">
+                    <li>Mountaineering expeditions</li>
+                    <li>Rock climbing</li>
+                    <li>Trekking</li>
+                    <li>Para jumping</li>
+                    <li>Scuba diving</li>
+                    <li>Water skiing</li>
+                    <li>Sailing and kayaking</li>
+                    <li>Cycle and motorcycle expeditions</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="song" class="section">
+            <div class="content-card">
+                <h2>NCC Song</h2>
+                <div class="song-content">
+                    <p>Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain<br>
+                    Apni Manzil Ek Hai,<br>
+                    Ha, Ha, Ha, Ek Hai,<br>
+                    Ho, Ho, Ho, Ek Hai.<br>
+                    Hum Sab Bharatiya Hain.</p>
+                    
+                    <p>Kashmir Ki Dharti Rani Hai,<br>
+                    Sartaj Himalaya Hai,<br>
+                    Saadiyon Se Humne Isko Apne Khoon Se Pala Hai<br>
+                    Desh Ki Raksha Ki Khatir Hum Shamshir Utha Lenge,<br>
+                    Hum Shamshir Utha Lenge.</p>
+
+                    <p>Bikhre Bikhre Taare Hain Hum Lekin Jhilmil Ek Hai,<br>
+                    Ha, Ha, Ha, Ek Hai<br>
+                    Hum Sab Bharatiya Hai.</p>
+
+                    <p>Mandir Gurudwaare Bhi Hain Yahan<br>
+                    Aur Masjid Bhi Hai Yahan<br>
+                    Girija Ka Hai Ghariyaal Kahin<br>
+                    Mullah ki Kahin Hai Ajaan</p>
+
+                    <p>Ek Hee Apna Ram Hain, Ek hi Allah Taala Hai,<br>
+                    Ek Hee Allah Taala Hain, Raang Birange Deepak Hain Hum,<br>
+                    lekin Jagmag Ek Hai, Ha Ha Ha Ek Hai, Ho Ho Ho Ek Hai.<br>
+                    Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 National Cadet Corps. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

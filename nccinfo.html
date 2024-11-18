@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Cadet Corps (NCC)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Combined Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #518bbb, #3b6aa5);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInHeader 1.5s ease-in-out;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: slideInNavbar 1.2s ease-out;
+            border-bottom: 2px solid #f4f7fa;
+        }
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            animation: popInLogo 1.4s ease-in-out;
+        }
+        .logo {
+            height: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Nav Links */
+        nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInLinks 1.5s ease forwards;
+            opacity: 0;
+        }
+        .nav-links a:hover {
+            background-color: #4d8bb3;
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 6px 12px rgba(77, 139, 179, 0.5);
+        }
+
+         /* Dropdown Menu */
+         .dropdown {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: none;
+            width: 220px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            pointer-events: none; /* Disable interactions initially */
+        }
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interactions when shown */
+        }
+
+        /* Dropdown Links */
+        .dropdown a {
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeInDropdownLinks 0.5s ease forwards;
+            opacity: 0;
+        }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f9fc;
+            color: #518bbb;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInNavbar {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popInLogo {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeInLinks {
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInDropdownLinks {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Combined Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Roboto', sans-serif; /* Updated font */
+    background-color: #f0f4f8; /* Light background color */
+    color: #444; /* Text color */
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #518bbb, #3b6aa5);
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInHeader 1.5s ease-in-out;
+    width: 100%;
+}
+
+/* Content Section */
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 2.5em; /* Adjusted for better readability */
+    color: #3b6aa5; /* Heading color */
+}
+
+.section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center; /* Centers the content */
+}
+
+/* Paragraph */
+p {
+    line-height: 1.6;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #555; /* Lighter text color for paragraphs */
+}
+
+/* Centering and Styling Song */
+.song-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.song {
+    font-size: 1.2em;
+    color: #518bbb; /* Song color */
+    font-weight: bold;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    border-radius: 8px;
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Blockquotes */
+blockquote {
+    background-color: #f9f9f9;
+    border-left: 5px solid #518bbb;
+    padding: 10px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    text-align: center; /* Centers the blockquote text */
+}
+
+/* Table */
+table {
+    width: 100%;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: center; /* Centers the table content */
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f7fa;
+    font-weight: bold;
+}
+
+/* Responsive Design for Larger Screens */
+@media (min-width: 768px) {
+    .section {
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+    p {
+        font-size: 1.2em;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    h2, h3 {
+        font-size: 2.2em;
+    }
+    blockquote {
+        font-size: 1.2em;
+    }
+}
+
+/* Keyframe Animations */
+@keyframes fadeInHeader {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLinks {
+    0% { opacity: 0; transform: translateX(-15px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+/* General Section Styling */
+.ncc-strength-section {
+    background-color: #ffffff;  /* White background */
+    padding: 20px;              /* Add padding for spacing */
+    margin: 20px auto;          /* Center the section horizontally with margin */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: keeps the shadow for subtle effect */
+    max-width: 100%;            /* Ensures it takes up full device width */
+    width: 92%;                /* Full width on all devices */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* List Styling */
+.ncc-strength-section ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+}
+
+/* Individual List Item */
+.ncc-strength-section li {
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+/* Heading Styles */
+.ncc-strength-section strong {
+    font-size: 1.5em;
+    color: #0056b3; /* Navy Blue for section titles */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Paragraph Styling */
+.ncc-strength-section p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Nested List Styling */
+.ncc-strength-section ul ul {
+    list-style-type: square; /* Square bullets for nested lists */
+    margin-left: 20px;
+}
+
+/* Nested List Item Styling */
+.ncc-strength-section ul ul li {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .ncc-strength-section {
+        padding: 20px; /* Ensures padding on small screens */
+    }
+
+    .ncc-strength-section strong {
+        font-size: 1.3em; /* Slightly smaller font size for smaller screens */
+    }
+
+    .ncc-strength-section p, .ncc-strength-section ul ul li {
+        font-size: 1em; /* Adjusted font size for readability */
+    }
+}
+.first-thing{
+    margin-top: 50px;
+}
+/* Section Cadet Styling */
+.section-cadet {
+    background-color: #ffffff; /* White background */
+    padding: 30px 20px;        /* Padding around the content */
+    margin: 20px auto;         /* Center the section with vertical margins */
+    border-radius: 8px;        /* Rounded corners */
+   
+    max-width: 1400px;          /* Limit the maximum width for better readability */
+    width: 90%;                /* Make it responsive on smaller devices */
+    text-align: center;        /* Center-align the text */
+}
+
+/* List Styling */
+.section-cadet ul {
+    list-style-type:circle;     /* Use bullet points for the list */
+    margin: 0;                 /* Remove default margin */
+    padding-left: 20px;        /* Add space for bullets */
+    text-align:center;          /* Align the list items to the left */
+}
+
+/* List Item Styling */
+.section-cadet li {
+    font-size: 1.2em;          /* Slightly larger font for list items */
+    color: #333;              /* Dark gray for text */
+    margin-bottom: 10px;       /* Space between list items */
+    line-height: 1.6;          /* Improve readability with line spacing */
+
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .section-cadet {
+        padding: 20px;         /* Adjust padding for smaller screens */
+    }
+
+    .section-cadet li {
+        font-size: 1em;        /* Slightly reduce font size */
+    }
+}
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        National Cadet Corps (NCC)
+    </header>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="ncclogo.png" alt="University Logo" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="gallary.html">Gallery</a></li>
+                
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="cadetdetails.html">Cadet Details</a></li>
+                <li><a href="outcomes.html">Outcomes</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Dropdown Menu Positioned Outside Navbar -->
+    <div class="dropdown" id="dropdown-menu">
+        <a href="nccinfo.html">NCC Info</a>
+        <a href="index.html">NCC at KLH</a>
+    </div>
+
+
+<div class="first-thing">
+    <h1>National Cadet Corps (NCC)</h1>
+</div>
+    <div class="section">
+        <p>The National Cadet Corps (NCC) is the youth wing of the Indian Armed Forces with its headquarters in New Delhi, India. It is open to school and college students on a voluntary basis as a Tri-Services Organisation, comprising the Army, the Navy, and the Air Force. Cadets are given basic military training in small arms and drill. Officers and cadets have no liability for active military service once they complete their course.</p>
+    </div>
+    
+    <h2>NCC Flag</h2>
+    <div class="section">
+        <img src="ncc-flag.jpg" alt="NCC Flag">
+        <p>The NCC flag for various units of the NCC was first introduced in 1951. The first flag was of the same pattern, colour, and size as used by various regiments of the Army. The only difference was that it had the NCC badge and unit designation placed in the centre. Later, it was felt that the flag should be designed to keep the inter-service character of the Corps. In 1954 the existing Tri-colour flag was introduced. The three colours in the flag depict the three services of the Corps: red for the Army, deep blue for the Navy, and light blue for the Air Force. The letters NCC and the NCC crest in gold in the middle of the flag encircled by a wreath of lotus give the flag a colourful look and a distinct identity.</p>
+    </div>
+
+    <h2>Establishment of NCC Song</h2>
+    <div class="section">
+        <p>An official song of the NCC titled <i>"Kadam Mila Ke Chal"</i> was adopted in 1963. This was, however, changed to the current NCC Song titled <i>"Ham Sabh Bhartiya Hain"</i> in October 1982. "Ham Sabh Bhartiya Hain" - NCC song is written by Sudarshan Fakir.</p>
+    </div>
+
+    <h3>NCC Song Lyrics</h3>
+    <div class="section">
+        <p>
+            Hum Sab Bhartiya Hain, Hum Sab Bhartiya Hain<br>
+            Apni Manzil Ek Hai,<br>
+            Ha, Ha, Ha, Ek Hai,<br>
+            Ho, Ho, Ho, Ek Hai.<br>
+            Hum Sab Bhartiya Hain.<br><br>
+            Kashmir Ki Dharti Rani Hai,<br>
+            Sartaj Himalaya Hai,<br>
+            Saadiyon Se Humne Isko Apne Khoon Se Pala Hai<br>
+            Desh Ki Raksha Ki Khatir Hum Shamshir Utha Lenge,<br>
+            Hum Shamshir Utha Lenge.<br><br>
+            Bikhre Bikhre Taare Hain Hum Lekin Jhilmil Ek Hai,<br>
+            Ha, Ha, Ha, Ek Hai<br>
+            Hum Sab Bharatiya Hai.<br><br>
+            Mandir Gurudwaare Bhi Hain Yahan<br>
+            Aur Masjid Bhi Hai Yahan<br>
+            Girija Ka Hai Ghariyaal Kahin<br>
+            Mullah ki Kahin Hai Ajaan<br><br>
+            Ek Hee Apna Ram Hain, Ek hi Allah Taala Hai,<br>
+            Ek Hee Allah Taala Hain, Raang Birange Deepak Hain Hum,<br>
+            Lekin Jagmag Ek Hai, Ha Ha Ha Ek Hai, Ho Ho Ho Ek Hai.<br>
+            Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain.
+        </p>
+    </div>
+
+    <h2>History of NCC</h2>
+    <div class="section">
+        
+        <p>The NCC in India was formed in 1948. It can be traced back to the ‘University Corps,’ which was created under the Indian Defence Act 1917, with the objective of making up for a shortage of personnel in the Army...</p>
+        <!-- Shortened for brevity; continue with the full text as provided -->
+    </div>
+
+    <h2>Motto of NCC</h2>
+    <div class="section">
+        <p>The motto of NCC is <b>"Unity and Discipline"</b>, chosen during the 12th CAC meeting held on 12 Oct 1980.</p>
+    </div>
+
+    <h2>Aims of NCC</h2>
+    <div class="section">
+        <p>The ‘Aims’ of the NCC laid out in 1988 continue to meet the requirements expected of it in the current socio-economic scenario of the country...</p>
+        <!-- Continue with the full text -->
+    </div>
+
+    <h2>Oath</h2>
+    <div class="section">
+        <blockquote>
+            "I do hereby solemnly promise that I will serve my motherland most truly and loyally and that I will abide by the rules and regulations of the National Cadet Corps..."
+        </blockquote>
+    </div>
+
+    <h2>Pledge</h2>
+    <div class="section">
+        <blockquote>
+            "We, the cadets of the national cadet corps, do solemnly pledge that we shall always uphold the unity of India..."
+        </blockquote>
+    </div>
+
+    <h2>Organisation</h2>
+    <div class="section">
+        <p>The NCC is headed by the Director General (DG), an officer of three-star rank...</p>
+         <img src="organisation.png" alt="organisation">
+        <!-- Continue with the full text and additional images -->
+    </div>
+    <h2>Directorates</h2>
+<div class="section">
+    <table border="1" cellspacing="0" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Director No</th>
+                <th>Directorates</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Andhra Pradesh & Telangana</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bihar & Jharkhand</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Gujarat & Dadra and Nagar Haveli and Daman and Diu</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Jammu & Kashmir and Ladakh</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Karnataka & Goa</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Kerala & Lakshadweep</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Madhya Pradesh & Chhattisgarh</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Maharashtra</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>North East Region (Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, Tripura)</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Odisha</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Punjab, Haryana, Himachal Pradesh and Chandigarh</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Rajasthan</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Tamil Nadu, Puducherry and Andaman and Nicobar</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Uttarakhand</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Uttar Pradesh</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>West Bengal & Sikkim</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h2>Strength of NCC</h2>
+<div class="ncc-strength-section">
+    <ul>
+        <li>
+            <strong>Army:</strong> 
+            <p>
+                Each battalion or unit of NCC consists of several platoons or companies (coy). For senior division boys:
+            </p>
+            <ul>
+                <li>Each platoon consists of 52 cadets, and each coy consists of 160 cadets.</li>
+                <li>Each battalion (BN) has 4 to 7 companies, meaning each battalion carries around 640 to 1120 cadets.</li>
+                <li>A senior wing girls' battalion consists of 2 to 7 companies, meaning a total of 320 to 1120 cadets.</li>
+                <li>For junior division boys and junior wing girls, each troop has 100 cadets, and each battalion has at least one troop.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Navy:</strong> 
+            <p>
+                For senior division boys:
+            </p>
+            <ul>
+                <li>Each battalion or unit consists of 4 to 8 divisions, and each division consists of 50 cadets.</li>
+                <li>A similar arrangement exists for senior wing girls.</li>
+                <li>For junior division boys and junior wing girls, each battalion has a troop of 100 cadets.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Air:</strong> 
+            <p>
+                For senior division boys and senior wing girls:
+            </p>
+            <ul>
+                <li>Each unit consists of at least 2 fleets, each consisting of 100 cadets.</li>
+                <li>Each unit, known as a Squadron, carries around 200 cadets.</li>
+                <li>For junior wing girls and junior division boys, each squadron has a troop consisting of 100 cadets.</li>
+                <li>
+                    Each unit can have up to 24 troops of senior division boys, expanding their strength to 2400 cadets, 
+                    but this is the maximum limit.
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+    <h2>Ranks in Senior Division</h2>
+    <div class="section">
+        <img src="ranks.png" alt="NCC Ranks">
+        <p>Ranks and insignia include Cadet Senior Under Officer (CSUO), Cadet Junior Under Officer (CJUO), and others...</p>
+    </div>
+
+    <h2>Cadet Activities</h2>
+    <div class="section-cadet">
+        <ul>
+            <li>Combined Annual Training Camps (CATC)</li>
+            <li>National Integration Camps (NIC)</li>
+            <li>Hiking and Trekking Camp</li>
+            <li>Army Attachment Camp</li>
+            <li>Advance Leadership Camp (ALC)</li>
+            <!-- Continue listing all activities -->
+        </ul>
+    </div>
+
+    
+   <h2>Certification & Examinations</h2>
+<div class="section">
+    <p>In the NCC, there are three certificates awarded to cadets after completing their respective training and passing examinations. These certificates are:</p>
+    <ul>
+        <li>
+            <strong>Certificate A:</strong>
+            <p>This is awarded to junior division cadets (school-level cadets) upon completing one to two years of training and attending a minimum of one camp.</p>
+        </li>
+        <li>
+            <strong>Certificate B:</strong>
+            <p>This is awarded to senior division cadets (college-level cadets) after completing two years of training and attending a minimum of one camp in the second year.</p>
+        </li>
+        <li>
+            <strong>Certificate C:</strong>
+            <p>This is the highest certificate in NCC, awarded to senior division cadets after completing three years of training, attending a minimum of two camps, and passing the examination. This certificate is highly valued and can provide advantages for career opportunities, especially in the defense forces.</p>
+        </li>
+    </ul>
+    <p>The examinations for these certificates include written tests and practical assessments to evaluate the cadets' knowledge, skills, and discipline. These certifications hold significant importance in the career progression of cadets and can be used as credentials for applying to various professional roles.</p>
+</div>
+
+    
+    <footer>
+        <!-- Footer -->
+    </footer>
+    <script>
+        /* JavaScript Functions */
+        const aboutLink = document.getElementById("about-link");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let dropdownTimeout;
+
+        function showDropdown() {
+            dropdownMenu.classList.add("show");
+            const linkRect = aboutLink.getBoundingClientRect();
+            dropdownMenu.style.left = `${linkRect.left}px`;
+            dropdownMenu.style.top = `${linkRect.bottom + 10}px`;
+        }
+
+        function hideDropdown() {
+            dropdownMenu.classList.remove("show");
+        }
+
+        aboutLink.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        aboutLink.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+
+        dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        dropdownMenu.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+    </script>
+</body>
+</html>

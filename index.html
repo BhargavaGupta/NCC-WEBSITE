@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC at KLH University</title>
+    <!-- Link to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navbar styles */
+        header {
+            background-color: #518bbb;
+            text-align: center;
+            padding: 1px 0;
+            font-family: 'Merriweather', serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #518bbb, #3b6aa5);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInHeader 1.5s ease-in-out;
+        }
+
+        /* Navbar */
+        .navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: slideInNavbar 1.2s ease-out;
+    border-bottom: 2px solid #f4f7fa;
+}
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            animation: popInLogo 1.4s ease-in-out;
+        }
+        .logo {
+            height: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Nav Links */
+          /* Navbar */
+
+
+/* Nav Links */
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInLinks 1.5s ease forwards;
+            opacity: 0;
+        }
+        .nav-links a:hover {
+            background-color: #4d8bb3;
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 6px 12px rgba(77, 139, 179, 0.5);
+        }
+
+         /* Dropdown Menu */
+         .dropdown {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: none;
+            width: 220px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            pointer-events: none; /* Disable interactions initially */
+        }
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interactions when shown */
+        }
+
+        /* Dropdown Links */
+        .dropdown a {
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeInDropdownLinks 0.5s ease forwards;
+            opacity: 0;
+        }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f9fc;
+            color: #518bbb;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInNavbar {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popInLogo {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeInLinks {
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInDropdownLinks {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Banner styles */
+        .banner {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url(bannerphoto2.JPG);
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            font-family: 'Merriweather', serif;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        }
+
+        .banner h2 {
+            position: relative;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0;
+            z-index: 1;
+        }
+
+        /* Content section */
+        .content-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .text-content {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .text-content h2 {
+            color: #1f3f7e;
+            font-family: 'Merriweather', serif;
+            font-size:30px;
+        }
+
+        .text-content p {
+            line-height: 1.6;
+            font-size: 19px;
+        }
+
+        .image-content {
+            width: 290px;
+            height: auto;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .text-content {
+                padding-right: 0;
+            }
+            .image-content {
+                width: 100%;
+                max-width: 300px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        National Cadet Corps (NCC)
+    </header>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="ncclogo.png" alt="University Logo" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="gallary.html">Gallery</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="cadetdetails.html">Cadet Details</a></li>
+                <li><a href="outcomes.html">Outcomes</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Dropdown Menu Positioned Outside Navbar -->
+    <div class="dropdown" id="dropdown-menu">
+        <a href="nccinfo.html">NCC Info</a>
+        <a href="NCC-AT-KLH.html">NCC at KLH</a>
+    </div>
+
+
+    <!-- Banner Section -->
+    <div class="banner">
+        <h2>NCC at KLH University</h2>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="content-section">
+        <div class="text-content">
+            <h2>1(T) Battalion NCC SD & SW</h2>
+            <p>
+                The NCC Unit at KLH University is designated as the 1(T) Battalion, led by <strong>Lt. Mohit Kumar Mishra</strong> for both boys and girls cadets. This battalion is part of the Hyderabad region within the Hyderabad Group.
+            </p>
+            <p>
+                Under the leadership of Lt. Mohit Kumar Mishra, the NCC unit at KLH University actively participates in various activities, contributing significantly to the overall objectives of the National Cadet Corps (NCC). This unit provides an opportunity for students to develop discipline, leadership, and command while serving the community and nation.
+            </p>
+        </div>
+        <img src="sirrr.jpg" alt="NCC Battalion Image" class="image-content">
+    </div>
+    <script>
+        const aboutLink = document.getElementById("about-link");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let dropdownTimeout;
+
+        function showDropdown() {
+            dropdownMenu.classList.add("show");
+            const linkRect = aboutLink.getBoundingClientRect();
+            dropdownMenu.style.left = `${linkRect.left}px`;
+            dropdownMenu.style.top = `${linkRect.bottom + 10}px`;
+        }
+
+        function hideDropdown() {
+            dropdownMenu.classList.remove("show");
+        }
+
+        aboutLink.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        aboutLink.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+
+        dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        dropdownMenu.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+    </script>
+</body>
+</html>

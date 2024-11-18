@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC Reports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            margin: 50px auto;
+            max-width: 1400px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #fff;
+            font-weight: 730;
+            padding-bottom: 10px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            
+            
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        th {
+            background-color: #34495e;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f9fb;
+        }
+
+        tr:hover {
+            background-color: #d1e7dd;
+            cursor: pointer;
+        }
+
+        .collapsible {
+            cursor: pointer;
+            background: linear-gradient(145deg, #2c3e50, #1f2933);
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            padding: 16px 20px;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collapsible:hover {
+            background: linear-gradient(145deg, #1b2838, #34495e);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .collapsible .icon {
+            font-size: 1.5rem;
+            transform: rotate(0deg);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), color 0.3s ease;
+        }
+
+        .collapsible.active .icon {
+            transform: rotate(180deg);
+            color: #ffd700; /* Change color for a visual indication */
+        }
+
+        .content {
+            display: none;
+            overflow: hidden;
+            background-color: #ffffff;
+            margin-top: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ripple Effect */
+        .collapsible::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .collapsible:active::after {
+            opacity: 0.3;
+            transition: none;
+        }
+
+        /* Back-to-Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+
+        .back-to-top:hover {
+            background-color: #1a252f;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        html {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            overflow-x: hidden;
+            color: #333;
+        }
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #518bbb, #3b6aa5);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInHeader 1.5s ease-in-out;
+        }
+
+        /* Navbar */
+        .navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: slideInNavbar 1.2s ease-out;
+    border-bottom: 2px solid #f4f7fa;
+}
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            animation: popInLogo 1.4s ease-in-out;
+        }
+        .logo {
+            height: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Nav Links */
+        nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInLinks 1.5s ease forwards;
+            opacity: 0;
+        }
+        .nav-links a:hover {
+            background-color: #4d8bb3;
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 6px 12px rgba(77, 139, 179, 0.5);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: none;
+            width: 220px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            pointer-events: none; /* Disable interactions initially */
+        }
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interactions when shown */
+        }
+
+        /* Dropdown Links */
+        .dropdown a {
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeInDropdownLinks 0.5s ease forwards;
+            opacity: 0;
+        }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f9fc;
+            color: #518bbb;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInNavbar {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popInLogo {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeInLinks {
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInDropdownLinks {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        National Cadet Corps (NCC)
+    </header>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="ncclogo.png" alt="University Logo" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="gallary.html">Gallery</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="cadetdetails.html">Cadet Details</a></li>
+                <li><a href="outcomes.html">Outcomes</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Dropdown Menu Positioned Outside Navbar -->
+    <div class="dropdown" id="dropdown-menu">
+        <a href="nccinfo.html">NCC Info</a>
+        <a href="index.html">NCC at KLH</a>
+    </div>
+
+    <div class="container">
+        <h1>NCC Reports</h1>
+
+        <!-- First Collapsible -->
+        <button class="collapsible">NCC Reports of ~2022 - 2023<span class="icon">+</span></button>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>DATE</th>
+                        <th>NAME OF ACTIVITY</th>
+                        <th>LOCATION</th>
+                        <th>NO. OF STUDENTS PARTICIPATED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>26-01-2023</td>
+                        <td><a href="report-republic-day-2023.html" target="_blank" style="color: black; text-decoration: none;">Republic Day</a></td>
+                        <td>KLH University Grounds</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>14-09-2023</td>
+                        <td><a href="report-badminton-jr-championship-2023.html" target="_blank" style="color: black; text-decoration: none;">Badminton Sub Jr. National Championship (Jwala Gutta)</a></td>
+                        <td>Jwala Gutta Academy</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>30-09-2023</td>
+                        <td><a href="swatchatha hi seva.pdf" target="_blank" style="color: black; text-decoration: none;">Swatchh Hi Seva</a></td>
+                        <td>Aziz Nagar Village</td>
+                        <td>46</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>30-09-2023</td>
+                        <td><a href="world river day.pdf" target="_blank" style="color: black; text-decoration: none;">World Rivers Day</a></td>
+                        <td>Aziz Nagar Village</td>
+                        <td>46</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>08-10-2023</td>
+                        <td><a href="cancer marathon.pdf" target="_blank" style="color: black; text-decoration: none;">Cancer Marathon Run</a></td>
+                        <td>Gachibowli Stadium</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>15-08-2023</td>
+                        <td><a href="report-independence-day-2023.html" target="_blank" style="color: black; text-decoration: none;">Independence Day</a></td>
+                        <td>KLH University Grounds</td>
+                        <td>20</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+            
+        </div>
+
+        <!-- Second Collapsible -->
+        <button class="collapsible">NCC Reports of ~2023 - 2024<span class="icon">+</span></button>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>DATE</th>
+                        <th>NAME OF ACTIVITY</th>
+                        <th>LOCATION</th>
+                        <th>NO. OF STUDENTS PARTICIPATED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>26-01-2024</td>
+                        <td><a href="report-republic-day-2024.html" target="_blank" style="color: black; text-decoration: none;">Republic Day</a></td>
+                        <td>KLH University Grounds</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>22-04-2024</td>
+                        <td><a href="WORLD EARTH DAY.pdf" target="_blank" style="color: black; text-decoration: none;">World Earth Day</a></td>
+                        <td>Aziz Nagar Village</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>21-06-2024</td>
+                        <td><a href="international yoga.pdf" target="_blank" style="color: black; text-decoration: none;">International Yoga Day</a></td>
+                        <td>KLH University Grounds</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>26-06-2024</td>
+                        <td><a href="international drug abuse.pdf" target="_blank" style="color: black; text-decoration: none;">International Day Against Drug</a></td>
+                        <td>Google Meet</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>16-07-2024</td>
+                        <td><a href="youth skills day.pdf" target="_blank" style="color: black; text-decoration: none;">World Youth Skills Day</a></td>
+                        <td>KLH University Activity Room</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>26-07-2024</td>
+                        <td><a href="av kargil.pdf" target="_blank" style="color: black; text-decoration: none;">Kargil Vijay Divas</a></td>
+                        <td>KLH University and A.V. College</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>15-08-2024</td>
+                        <td><a href="report-independence-day-2024.html" target="_blank" style="color: black; text-decoration: none;">Independence Day</a></td>
+                        <td>KLH University Grounds</td>
+                        <td>35</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>16-08-2024</td>
+                        <td><a href="treeplantationdrive.pdf" target="_blank" style="color: black; text-decoration: none;">Tree Plantations</a></td>
+                        <td>KLH University Garden</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>23-08-2024</td>
+                        <td><a href="nationalspaceday.pdf" target="_blank" style="color: black; text-decoration: none;">National Space Day</a></td>
+                        <td>KLH University Campus</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>14-09-2024</td>
+                        <td><a href="worldfirstaidday.pdf" target="_blank" style="color: black; text-decoration: none;">World First Aid Day</a></td>
+                        <td>KLH University Campus Seminar Hall</td>
+                        <td>20</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>11</td>
+                        <td>31-10-2024</td>
+                        <td><a href="RASHTRYIA EKTA DIVAS 31-10-24 (1).pdf" target="_blank" style="color: black; text-decoration: none;">Rashtriya Ekta Divas</a></td>
+                        <td>KLH University Campus Seminar Hall</td>
+                        <td>20</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+        </div>
+    </div>
+
+
+
+    
+
+    
+
+    
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <script>
+        // Handle collapsible functionality for multiple buttons
+        const collapsibles = document.querySelectorAll('.collapsible');
+
+        collapsibles.forEach((collapsible) => {
+            collapsible.addEventListener('click', () => {
+                const content = collapsible.nextElementSibling;
+                collapsible.classList.toggle('active');
+
+                // Toggle the content visibility
+                if (content.style.display === 'none' || content.style.display === '') {
+                    content.style.display = 'block';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+        });
+
+        // Back-to-Top Button Functionality
+        const backToTop = document.getElementById('backToTop');
+
+        window.onscroll = () => {
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition >= scrollHeight - 10) {
+                backToTop.classList.add('complete');
+            } else {
+                backToTop.classList.remove('complete');
+            }
+        };
+
+        backToTop.onclick = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        const aboutLink = document.getElementById("about-link");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let dropdownTimeout;
+
+        function showDropdown() {
+            dropdownMenu.classList.add("show");
+            const linkRect = aboutLink.getBoundingClientRect();
+            dropdownMenu.style.left = `${linkRect.left}px`;
+            dropdownMenu.style.top = `${linkRect.bottom + 10}px`;
+        }
+
+        function hideDropdown() {
+            dropdownMenu.classList.remove("show");
+        }
+
+        aboutLink.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        aboutLink.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+
+        dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        dropdownMenu.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+        
+    </script>
+
+</body>
+</html>

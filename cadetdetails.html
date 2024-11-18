@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Cadet List with NCC Navbar</title>
+    <!-- Link to Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Reset and Layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        html{
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f4f7fc;
+        }
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f4f7fc;
+            
+        }
+
+
+        /* Navbar */
+         /* Header */
+         header {
+            background: linear-gradient(90deg, #518bbb, #3b6aa5);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInHeader 1.5s ease-in-out;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: slideInNavbar 1.2s ease-out;
+            border-bottom: 2px solid #f4f7fa;
+        }
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            animation: popInLogo 1.4s ease-in-out;
+        }
+        .logo {
+            height: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+       /* Nav Links */
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInLinks 1.5s ease forwards;
+            opacity: 0;
+        }
+        .nav-links a:hover {
+            background-color: #4d8bb3;
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 6px 12px rgba(77, 139, 179, 0.5);
+        }
+
+         /* Dropdown Menu */
+         .dropdown {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: none;
+            width: 220px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            pointer-events: none; /* Disable interactions initially */
+        }
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interactions when shown */
+        }
+
+        /* Dropdown Links */
+        .dropdown a {
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeInDropdownLinks 0.5s ease forwards;
+            opacity: 0;
+        }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+        .dropdown a:hover {
+            background-color: #f4f9fc;
+            color: #518bbb;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInNavbar {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popInLogo {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeInLinks {
+            0% { opacity: 0; transform: translateX(-15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInDropdownLinks {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Collapsible List Section */
+        .container {
+            width: 90%;
+    max-width: 1300px;
+    margin: 20px auto; /* Center container horizontally */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+        }
+        .collapsible {
+    background-color: #d0d0d0; /* Darker light gray background color for the button */
+    color: #333; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+    padding: 15px 20px; /* Padding inside button for better touch area */
+    width: 90%; /* Button width */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    text-align: left; /* Align text to the left */
+    outline: none; /* Remove outline */
+    font-size: 18px; /* Font size */
+    font-weight: bold; /* Bold text */
+    display: flex; /* Flex display for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space items apart */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transition effects */
+    margin: 20px auto; /* Margin between buttons */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+/* Hover effect for buttons */
+.collapsible:hover {
+    background-color: #b0b0b0; /* Darker gray background on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
+/* Active state for buttons */
+.collapsible.active {
+    background-color: #a0a0a0; /* Even darker gray when active */
+    color: #000; /* Change text color when active */
+}
+
+
+        .collapsible:after {
+            content: '\002B';
+            font-size: 28px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .collapsible.active:after {
+            content: '\2212';
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .table th {
+            background-color: #004080;
+            color: white;
+        }
+        /* Add specific margin to the About link */
+        .nav-links li:first-child {
+            margin-left: 150px;
+        }
+        /* Title Section Styling */
+.title {
+    display: flex;                /* Use Flexbox for centering */
+    justify-content: center;      /* Horizontally center the content */
+    align-items: center;          /* Vertically center the content */
+    text-align: center;           /* Center-align the text */
+    background-color: #f0f0f0;    /* Light gray background for emphasis */
+    padding: 20px 0;              /* Add spacing above and below */
+    border-bottom: 2px solid #ccc; /* Optional: Add a subtle border below */
+}
+
+/* Title Text Styling */
+.title h1 {
+    font-size: 2.5em;             /* Increase font size for prominence */
+    color: #003366;               /* Professional navy-blue color */
+    font-family: 'Arial', sans-serif; /* Clean, professional font */
+    font-weight: bold;            /* Make the text bold */
+    letter-spacing: 2px;          /* Add spacing between letters */
+    text-transform: uppercase;    /* Make the text all uppercase */
+    margin: 0;                    /* Remove default margin */
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .title h1 {
+        font-size: 2em;           /* Reduce font size on smaller devices */
+    }
+}
+
+
+/* Style for the button */
+.custom-button {
+    background-color: #4CAF50;  /* Green background */
+       /* Center horizontally */
+    align-items: center;    
+    color: white;               /* White text color */
+    border: none;               /* Remove the border */
+    padding: 20px 0;             /* Reduced padding for top and bottom */
+    width: 30%;                 /* Button width to 50% of the container */
+    font-size: 16px;            /* Increase font size */
+    cursor: pointer;           /* Change cursor to pointer on hover */
+    border-radius: 25px;        /* Round the corners */
+    text-align: center;         /* Center text inside the button */
+    display: block;             /* Make the button a block element */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    text-transform: uppercase;  /* Make the text uppercase */
+    margin: 50px 0;             /* Add margin to top and bottom */
+    margin-left: 525px;
+    margin-bottom: 5px;
+}
+
+/* Change button color when hovered */
+.custom-button:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+
+.banner {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url(bannerphoto2.JPG);
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            font-family: 'Merriweather', serif;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        }
+
+        .banner h2 {
+            position: relative;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0;
+            z-index: 1;
+        }
+
+        .navbar ul li:first-child {
+  
+  left: -100px;
+}
+
+        
+    </style>
+</head>
+
+<body>
+    <!-- Title Header -->
+    <header>
+        National Cadet Corps (NCC)
+    </header>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="ncclogo.png" alt="University Logo" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="gallary.html">Gallery</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="cadetdetails.html">Cadet Details</a></li>
+                <li><a href="outcomes.html">Outcomes</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Dropdown Menu Positioned Outside Navbar -->
+    <div class="dropdown" id="dropdown-menu">
+        <a href="nccinfo.html">NCC Info</a>
+        <a href="index.html">NCC at KLH</a>
+    </div>
+    <div class="banner">
+        <h2>CADET  DETAILS</h2>
+    </div>
+
+    <div class="center-container">
+        <!-- Add the button -->
+        <button class="custom-button">1(T) BN (HYDERBAD)</button>
+    </div>
+
+
+
+    <div class="title">
+        <h1>CADET-DETAILS</h1>
+    </div>
+
+    
+  
+
+    <!-- Collapsible Cadet List Section -->
+    <div class="container">
+        <button type="button" class="collapsible">List of Cadets Enrolled in the Academic Year of 2022-23
+        </button>
+        <div class="content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>RANK</th>
+                        <th>REG.NO</th>
+                        <th>NAME OF THE CADET</th>
+                        <th>Branch</th>
+                        <th>COLLEGE ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152701</td>
+                        <td>V.ABHIRAM</td>
+                        <td>CSE</td>
+                        <td>2310030187</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152702</td>
+                        <td>T.AKHILESH</td>
+                        <td>CSE</td>
+                        <td>2310030116</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152703</td>
+                        <td>M.B.VEER</td>
+                        <td>CSE</td>
+                        <td>2210030449</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152704</td>
+                        <td>T.YASHWANTH RAJ</td>
+                        <td>CSE</td>
+                        <td>2210030310</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152705</td>
+                        <td>G.RAM CHARAN VISHNU VARDHAN</td>
+                        <td>CSE</td>
+                        <td>2310030336</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152706</td>
+                        <td>K.CHAITANYA RAM</td>
+                        <td>ECE</td>
+                        <td>2210040054</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152707</td>
+                        <td>G.RAKESH</td>
+                        <td>CSE</td>
+                        <td>2310030203</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152708</td>
+                        <td>KUNDAM SAI VENKET REDDY</td>
+                        <td>CSE</td>
+                        <td>2210030488</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152709</td>
+                        <td>ABHISHEK .M</td>
+                        <td>CSE</td>
+                        <td>2310030217</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152710</td>
+                        <td>J.LOKESH</td>
+                        <td>CSE</td>
+                        <td>2210030413</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152711</td>
+                        <td>KOLLA KOUSHIL</td>
+                        <td>CSE</td>
+                        <td>2210030496</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152712</td>
+                        <td>K.MANISH</td>
+                        <td>AIDS</td>
+                        <td>2310080057</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152713</td>
+                        <td>K.BHARGAVA GUPTA</td>
+                        <td>ECE</td>
+                        <td>2210040023</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152714</td>
+                        <td>SAI VIMAL</td>
+                        <td>ECE</td>
+                        <td>2210040107</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152715</td>
+                        <td>M.UMA KANTH</td>
+                        <td>ECE</td>
+                        <td>2210040094</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152716</td>
+                        <td>DEEPANSH REDDY</td>
+                        <td>CSE</td>
+                        <td>2210030220</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152717</td>
+                        <td>A.SAI.KUMAR</td>
+                        <td>CSE</td>
+                        <td>2210030394</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152718</td>
+                        <td>U.CHAITANYA VIGNESH</td>
+                        <td>ECE</td>
+                        <td>2310040007</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152719</td>
+                        <td>MD.SAMEER AHMED</td>
+                        <td>ECE</td>
+                        <td>2310040004</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>CDT</td>
+                        <td>TG/2023/SDA/152720</td>
+                        <td>L . KARTHIKEYA</td>
+                        <td>ECE</td>
+                        <td>2210040145</td>
+                    </tr>
+                    <tr>
+    <td>21</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152721</td>
+    <td>K.AKSHAY SINGH</td>
+    <td>ECE</td>
+    <td>2210040034</td>
+</tr>
+<tr>
+    <td>22</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152722</td>
+    <td>P.MANOJ</td>
+    <td>ECE</td>
+    <td>2310040118</td>
+</tr>
+<tr>
+    <td>23</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152723</td>
+    <td>RAO NAGA SAI MANOJ</td>
+    <td>ECE</td>
+    <td>2310040136</td>
+</tr>
+<tr>
+    <td>24</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152724</td>
+    <td>J.JAYA SAI KIRAN</td>
+    <td>ECE</td>
+    <td>2310040112</td>
+</tr>
+<tr>
+    <td>25</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152725</td>
+    <td>SUNIL RAVI</td>
+    <td>ECE</td>
+    <td>2310040006</td>
+</tr>
+<tr>
+    <td>26</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152726</td>
+    <td>VAMSI KRISHNA</td>
+    <td>ECE</td>
+    <td>2310040130</td>
+</tr>
+<tr>
+    <td>27</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152727</td>
+    <td>RAHUL SAI</td>
+    <td>ECE</td>
+    <td>2310040110</td>
+</tr>
+<tr>
+    <td>28</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152728</td>
+    <td>Y.MAHESH</td>
+    <td>ECE</td>
+    <td>2310040149</td>
+</tr>
+<tr>
+    <td>29</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152729</td>
+    <td>A.UMESH</td>
+    <td>ECE</td>
+    <td>2310040139</td>
+</tr>
+<tr>
+    <td>30</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152730</td>
+    <td>N.NAVEEN SAI</td>
+    <td>ECE</td>
+    <td>2310040019</td>
+</tr>
+<tr>
+    <td>31</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152731</td>
+    <td>K.SAI KRISHNA</td>
+    <td>ECE</td>
+    <td>2310040122</td>
+</tr>
+<tr>
+    <td>32</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152732</td>
+    <td>S.KRISHNA VIKRAM</td>
+    <td>ECE</td>
+    <td>2310040135</td>
+</tr>
+<tr>
+    <td>33</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152733</td>
+    <td>J.ESHWAR</td>
+    <td>ECE</td>
+    <td>2310040115</td>
+</tr>
+<tr>
+    <td>34</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152734</td>
+    <td>K.BHARAT</td>
+    <td>ECE</td>
+    <td>2310040128</td>
+</tr>
+<tr>
+    <td>35</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152735</td>
+    <td>M.VIKRAM</td>
+    <td>ECE</td>
+    <td>2310040131</td>
+</tr>
+<tr>
+    <td>36</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152736</td>
+    <td>L.NAGASAI</td>
+    <td>ECE</td>
+    <td>2310040117</td>
+</tr>
+<tr>
+    <td>37</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152737</td>
+    <td>K.BHAVANA</td>
+    <td>ECE</td>
+    <td>2310040114</td>
+</tr>
+<tr>
+    <td>38</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152738</td>
+    <td>P.SAI SURESH</td>
+    <td>ECE</td>
+    <td>2310040101</td>
+</tr>
+<tr>
+    <td>39</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152739</td>
+    <td>S.ADARSH</td>
+    <td>ECE</td>
+    <td>2310040134</td>
+</tr>
+<tr>
+    <td>40</td>
+    <td>CDT</td>
+    <td>TG/2023/SDA/152740</td>
+    <td>J.SIVA REDDY</td>
+    <td>ECE</td>
+    <td>2310040103</td>
+</tr>
+
+<tr>
+    <td>41</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152741</td>
+    <td>K.BHAVITHA</td>
+    <td>CSE</td>
+    <td>2210030412</td>
+</tr>
+<tr>
+    <td>42</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152742</td>
+    <td>C.SREE HASINI</td>
+    <td>CSE</td>
+    <td>2210030192</td>
+</tr>
+<tr>
+    <td>43</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152743</td>
+    <td>B.HARI PRIYA</td>
+    <td>ECE</td>
+    <td>2310040059</td>
+</tr>
+<tr>
+    <td>44</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152744</td>
+    <td>P.PRIYANKA</td>
+    <td>ECE</td>
+    <td>2310040070</td>
+</tr>
+<tr>
+    <td>45</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152745</td>
+    <td>SAI SANJU</td>
+    <td>ECE</td>
+    <td>2310040028</td>
+</tr>
+<tr>
+    <td>46</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152746</td>
+    <td>CH.SRUTHI YADAV</td>
+    <td>ECE</td>
+    <td>2210040024</td>
+</tr>
+<tr>
+    <td>47</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152747</td>
+    <td>V.SAHAANA</td>
+    <td>CSE</td>
+    <td>2310030006</td>
+</tr>
+<tr>
+    <td>48</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152748</td>
+    <td>B.AKSHAYA</td>
+    <td>CSE</td>
+    <td>2310030329</td>
+</tr>
+<tr>
+    <td>49</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152749</td>
+    <td>B.SNEHA REDDY</td>
+    <td>AIDS</td>
+    <td>2310080006</td>
+</tr>
+<tr>
+    <td>50</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152750</td>
+    <td>VEDA AMRUTHA</td>
+    <td>CSE</td>
+    <td>2210030424</td>
+</tr>
+<tr>
+    <td>51</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152751</td>
+    <td>UDAYA SINDHU</td>
+    <td>AIDS</td>
+    <td>2310080012</td>
+</tr>
+<tr>
+    <td>52</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152752</td>
+    <td>D.SRI NANDINI</td>
+    <td>ECE</td>
+    <td>2310040045</td>
+</tr>
+<tr>
+    <td>53</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152753</td>
+    <td>A.SATWIKA JOYCE</td>
+    <td>AIDS</td>
+    <td>2310080011</td>
+</tr>
+<tr>
+    <td>54</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152754</td>
+    <td>A.ANJALI</td>
+    <td>CSE</td>
+    <td>2210030411</td>
+</tr>
+<tr>
+    <td>55</td>
+    <td>CDT</td>
+    <td>TG/2023/SWA/152755</td>
+    <td>O.MULYA SREE</td>
+    <td>CSE</td>
+    <td>2210030413</td>
+</tr>
+
+                                                            
+                </tbody>
+            </table>
+        </div>
+
+        <button type="button" class="collapsible">List of Cadets Enrolled in the Academic Year of 2023-24
+        </button>
+        <div class="content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>RANK</th>
+                        <th>REG.NO</th>
+                        <th>NAME OF THE CADET</th>
+                        <th>Branch</th>
+                        <th>COLLEGE ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>CDT</td>
+                        <td>To</td>
+                        <td>BE</td>
+                        <td>Added</td>
+                        <td>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const collapsibles = document.querySelectorAll(".collapsible");
+        collapsibles.forEach(button => {
+            button.addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        });
+        const aboutLink = document.getElementById("about-link");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let dropdownTimeout;
+
+        function showDropdown() {
+            dropdownMenu.classList.add("show");
+            const linkRect = aboutLink.getBoundingClientRect();
+            dropdownMenu.style.left = `${linkRect.left}px`;
+            dropdownMenu.style.top = `${linkRect.bottom + 10}px`;
+        }
+
+        function hideDropdown() {
+            dropdownMenu.classList.remove("show");
+        }
+
+        aboutLink.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        aboutLink.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+
+        dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(dropdownTimeout);
+            showDropdown();
+        });
+
+        dropdownMenu.addEventListener("mouseleave", () => {
+            dropdownTimeout = setTimeout(hideDropdown, 300);
+        });
+    </script>
+</body>
+</html>

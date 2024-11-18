@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Table</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .table-container {
+            width: 90%;
+            margin: auto;
+            background-color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        thead th {
+            background-color: #005c74; /* dark teal */
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        tbody td {
+            background-color: #e1e7ea; /* light grey */
+            color: #333333;
+            padding: 10px;
+        }
+
+        tbody tr td:first-child,
+        thead tr th:first-child {
+            background-color: #005c74; /* dark teal */
+            color: #ffffff;
+            width: 8%;
+        }
+
+        .message {
+            text-align: left;
+            color: #555555;
+            font-size: 20px;
+            padding: 25px;
+            background-color: #e1e7ea; /* light grey */
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Enrolled +Extension</th>
+                    <th>Appeared Year</th>
+                    <th>B Certificate Appeared</th>
+                    <th>B Certificate Passed</th>
+                    <th>B Certificates%</th>
+                    <th>C Certificate Appeared</th>
+                    <th>C Certificate Passed</th>
+                    <th>C Certificate Pass%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023</td>
+                    <td>55</td>
+                    <td>2023</td>
+                    <td colspan="6" class="message">The cadets are in their first year, so there is no representation in B and C Certificates due to the new raising of the unit.</td>
+                </tr>
+                <!-- Blank row -->
+                <td colspan="9" style="height: 20px; background-color: #e1e7ea;"></td>
+                <tr>
+                  
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
